@@ -18,21 +18,25 @@ A scholarly Ghost theme with warm paper aesthetics, classic typography, and thou
 
 ## Installation
 
-1. Download or clone this repository
-2. Zip the theme folder (the folder containing `package.json`)
-3. Go to Ghost Admin → Settings → Design → Change Theme
-4. Upload the zip file
+### Quick Install (Recommended)
 
-### Quick Install via npm
+1. Download `codex-ghost-theme.zip` from the [latest release](https://github.com/phin3has/codex-ghost-theme/releases/latest)
+2. Go to Ghost Admin → Settings → Design → Change Theme
+3. Upload the zip file
+4. Activate the theme
+
+### Build from Source
 
 ```bash
 # Clone the repo
 git clone https://github.com/phin3has/codex-ghost-theme.git
-
-# Create distribution zip
 cd codex-ghost-theme
+
+# Install dependencies and create zip
 npm install
 npm run zip
+
+# Upload the generated zip to Ghost Admin
 ```
 
 ### Custom Routing (Optional)
