@@ -1,0 +1,187 @@
+{{!< default}}
+
+{{!-- Featured Post Section with Carousel --}}
+{{#get "posts" filter="featured:true" limit="5" as |featured|}}
+    {{#if featured}}
+        <section class="featured-section">
+            <div class="container">
+                <div class="featured-carousel" data-featured-count="{{featured.length}}">
+                    <div class="featured-carousel-track">
+                        {{#foreach featured}}
+                            <article class="featured-post" data-slide="{{@index}}">
+                                {{#if feature_image}}
+                                    <a href="{{url}}" class="featured-post-image" aria-hidden="true" tabindex="-1">
+                                        <img
+                                            src="{{img_url feature_image size="l"}}"
+                                            srcset="
+                                                {{img_url feature_image size="s"}} 300w,
+                                                {{img_url feature_image size="m"}} 600w,
+                                                {{img_url feature_image size="l"}} 1000w,
+                                                {{img_url feature_image size="xl"}} 2000w"
+                                            sizes="(max-width: 600px) 100vw, (max-width: 1000px) 70vw, 50vw"
+                                            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                                            loading="{{#if @first}}eager{{else}}lazy{{/if}}"
+                                        >
+                                    </a>
+                                {{/if}}
+                                <div class="featured-post-content">
+                                    <div class="featured-post-meta-top">
+                                        {{#if primary_tag}}
+                                            <a href="{{primary_tag.url}}" class="post-tag">{{primary_tag.name}}</a>
+                                            <span class="meta-separator" aria-hidden="true"></span>
+                                        {{/if}}
+                                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                                    </div>
+                                    <h2 class="featured-post-title">
+                                        <a href="{{url}}">{{title}}</a>
+                                    </h2>
+                                    {{#if custom_excerpt}}
+                                        <p class="featured-post-excerpt">{{custom_excerpt}}</p>
+                                    {{else}}
+                                        <p class="featured-post-excerpt">{{excerpt words="40"}}</p>
+                                    {{/if}}
+                                    <footer class="featured-post-meta">
+                                        {{#primary_author}}
+                                            <a href="{{url}}" class="author-link">
+                                                {{#if profile_image}}
+                                                    <img class="author-avatar" src="{{img_url profile_image size="xs"}}" alt="{{name}}">
+                                                {{/if}}
+                                                <span class="author-name">{{name}}</span>
+                                            </a>
+                                        {{/primary_author}}
+                                        {{#match @custom.show_reading_time true}}
+                                            <span class="reading-time-badge">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                                {{reading_time}}
+                                            </span>
+                                        {{/match}}
+                                    </footer>
+                                </div>
+                            </article>
+                        {{/foreach}}
+                    </div>
+                    {{!-- Carousel Navigation (only shown when multiple featured posts) --}}
+                    {{#has featured number="> 1"}}
+                        <nav class="featured-carousel-nav" aria-label="Featured posts navigation">
+                            <button class="carousel-btn carousel-btn-prev" aria-label="Previous featured post" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                            </button>
+                            <div class="carousel-dots" role="tablist" aria-label="Featured posts">
+                                {{#foreach featured}}
+                                    <button class="carousel-dot{{#if @first}} active{{/if}}" role="tab" aria-selected="{{#if @first}}true{{else}}false{{/if}}" aria-label="Go to featured post {{@number}}: {{title}}" data-slide="{{@index}}"></button>
+                                {{/foreach}}
+                            </div>
+                            <button class="carousel-btn carousel-btn-next" aria-label="Next featured post">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </nav>
+                    {{/has}}
+                </div>
+            </div>
+        </section>
+    {{/if}}
+{{/get}}
+
+{{!-- Inspirational Quote Section --}}
+<section class="quote-section">
+    <div class="container">
+        <div class="quote-block">
+            <div class="quote-marks" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
+                </svg>
+            </div>
+            <blockquote class="quote-text">
+                {{#if @custom.homepage_quote}}
+                    {{@custom.homepage_quote}}
+                {{else}}
+                    You have made us for yourself, O Lord, and our heart is restless until it rests in you.
+                {{/if}}
+            </blockquote>
+            <div class="quote-divider"></div>
+            <cite class="quote-attribution">
+                <span class="quote-author">
+                    {{#if @custom.homepage_quote_author}}
+                        {{@custom.homepage_quote_author}}
+                    {{else}}
+                        St. Augustine of Hippo
+                    {{/if}}
+                </span>
+                {{#if @custom.homepage_quote_source}}
+                    <span class="quote-source">{{@custom.homepage_quote_source}}</span>
+                {{else}}
+                    <span class="quote-source">Confessions, Book I</span>
+                {{/if}}
+            </cite>
+        </div>
+    </div>
+</section>
+
+{{!-- Main Post Grid --}}
+<section class="posts-section">
+    <div class="container">
+        {{!-- Section Header --}}
+        <header class="section-header">
+            <h2 class="section-title">Recent Reflections</h2>
+        </header>
+
+        {{!-- Post Grid --}}
+        {{#if posts}}
+            <div class="post-grid">
+                {{#foreach posts}}
+                    {{> post-card}}
+                {{/foreach}}
+            </div>
+        {{else}}
+            <div class="no-posts">
+                <p>No posts yet. Check back soon for theological reflections and commentary.</p>
+            </div>
+        {{/if}}
+
+        {{!-- Pagination --}}
+        {{#if pagination.pages}}
+            <nav class="pagination" role="navigation">
+                {{#if pagination.prev}}
+                    <a class="pagination-prev" href="{{pagination.prev}}">
+                        <span aria-hidden="true">&larr;</span> Newer Posts
+                    </a>
+                {{/if}}
+                <span class="pagination-info">Page {{pagination.page}} of {{pagination.pages}}</span>
+                {{#if pagination.next}}
+                    <a class="pagination-next" href="{{pagination.next}}">
+                        Older Posts <span aria-hidden="true">&rarr;</span>
+                    </a>
+                {{/if}}
+            </nav>
+        {{/if}}
+    </div>
+</section>
+
+
+{{!-- Newsletter Signup --}}
+{{#unless @member}}
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Join the Conversation</h2>
+                    <p class="newsletter-description">Weekly reflections on theology, culture, and the Christian life. No noise, just substance.</p>
+                </div>
+                <form class="newsletter-form" data-members-form>
+                    <div class="form-group">
+                        <input
+                            type="email"
+                            data-members-email
+                            placeholder="Your email address"
+                            required
+                            aria-label="Email address"
+                        >
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                    <div class="form-message" data-members-error></div>
+                    <p class="form-note">Respecting your inbox. Unsubscribe anytime.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+{{/unless}}

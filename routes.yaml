@@ -1,0 +1,50 @@
+# Custom Routes Configuration for The Bearded Commentary
+# Copy this file to content/settings/routes.yaml in your Ghost installation
+
+routes:
+  # Custom signup page
+  /subscribe/:
+    template: members/signup
+    data: page.subscribe
+
+  # Custom signin page
+  /signin/:
+    template: members/signin
+
+  # Custom account page
+  /account/:
+    template: members/account
+
+collections:
+  # Main blog collection
+  /:
+    permalink: /{slug}/
+    template: index
+
+  # Theology articles collection
+  /theology/:
+    permalink: /theology/{slug}/
+    template: index
+    filter: tag:theology
+
+  # Christian Living articles
+  /christian-living/:
+    permalink: /christian-living/{slug}/
+    template: index
+    filter: tag:christian-living
+
+  # Book Reviews
+  /book-reviews/:
+    permalink: /book-reviews/{slug}/
+    template: index
+    filter: tag:book-reviews
+
+  # Church History
+  /church-history/:
+    permalink: /church-history/{slug}/
+    template: index
+    filter: tag:church-history
+
+taxonomies:
+  tag: /topic/{slug}/
+  author: /author/{slug}/

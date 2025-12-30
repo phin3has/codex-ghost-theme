@@ -1,0 +1,113 @@
+<header class="site-header">
+    <div class="container">
+        <div class="header-inner">
+            {{!-- Logo/Site Title --}}
+            <div class="header-brand">
+                <a href="{{@site.url}}" class="site-logo">
+                    {{#if @site.logo}}
+                        <img src="{{@site.logo}}" alt="{{@site.title}}">
+                    {{else}}
+                        <div class="logo-lockup">
+                            {{!-- Open Book Icon (Two Pages) --}}
+                            <svg class="logo-icon" width="32" height="28" viewBox="0 0 32 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                {{!-- Left page --}}
+                                <path d="M16 4C12 2 7 2 2 3v20c5-1 10-1 14 1"/>
+                                {{!-- Right page --}}
+                                <path d="M16 4c4-2 9-2 14-1v20c-5-1-10-1-14 1"/>
+                                {{!-- Spine --}}
+                                <path d="M16 4v21"/>
+                                {{!-- Left page lines --}}
+                                <path d="M6 8h6M6 12h6M6 16h6" stroke-width="1"/>
+                                {{!-- Right page lines --}}
+                                <path d="M20 8h6M20 12h6M20 16h6" stroke-width="1"/>
+                            </svg>
+                            <div class="logo-text">
+                                <span class="site-title">{{@site.title}}</span>
+                                {{#if @custom.site_subtitle}}
+                                    <span class="site-subtitle">{{@custom.site_subtitle}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/if}}
+                </a>
+            </div>
+
+            {{!-- Navigation --}}
+            <nav class="header-nav" role="navigation" aria-label="Main navigation">
+                {{!-- Mobile Menu Toggle --}}
+                <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                </button>
+
+                {{!-- Navigation Menu --}}
+                <ul class="nav-menu" id="nav-menu">
+                    {{!-- Dynamic Tags/Sections (like footer) --}}
+                    {{#get "tags" limit="5" order="count.posts desc" include="count.posts"}}
+                        {{#foreach tags}}
+                            <li class="nav-item">
+                                <a href="{{url}}">{{name}}</a>
+                            </li>
+                        {{/foreach}}
+                    {{/get}}
+
+                    {{!-- Search --}}
+                    <li class="nav-item nav-search">
+                        <button class="search-toggle" aria-label="Open search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </li>
+
+                    {{!-- Vertical Separator --}}
+                    <li class="nav-separator" aria-hidden="true"></li>
+
+                    {{!-- Member Actions --}}
+                    {{#if @site.members_enabled}}
+                        {{#if @member}}
+                            <li class="nav-item nav-member">
+                                <a href="#/portal/account" class="member-link">
+                                    {{#if @member.avatar_image}}
+                                        <img class="member-avatar" src="{{@member.avatar_image}}" alt="{{@member.name}}">
+                                    {{else}}
+                                        <span class="member-avatar member-avatar-placeholder">{{@member.name.[0]}}</span>
+                                    {{/if}}
+                                </a>
+                            </li>
+                        {{else}}
+                            <li class="nav-item nav-subscribe">
+                                <a href="#/portal/signup" class="btn btn-primary">Subscribe</a>
+                            </li>
+                        {{/if}}
+                    {{/if}}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {{!-- Search Overlay --}}
+    <div class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+        <div class="search-container">
+            <form class="search-form" role="search">
+                <label for="search-input" class="sr-only">Search articles</label>
+                <input
+                    type="search"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="Search articles..."
+                    aria-label="Search articles"
+                >
+                <button type="button" class="search-close" aria-label="Close search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </form>
+            <div class="search-results"></div>
+        </div>
+    </div>
+</header>

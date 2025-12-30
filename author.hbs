@@ -1,0 +1,88 @@
+{{!< default}}
+
+<section class="author-archive">
+    {{!-- Author Header --}}
+    <header class="author-header">
+        <div class="container container-narrow">
+            <div class="author-header-content">
+                {{#if profile_image}}
+                    <img
+                        class="author-header-avatar"
+                        src="{{img_url profile_image size="m"}}"
+                        alt="{{name}}"
+                    >
+                {{else}}
+                    <span class="author-header-avatar author-avatar-placeholder">{{name.[0]}}</span>
+                {{/if}}
+                <h1 class="author-header-name">{{name}}</h1>
+                {{#if bio}}
+                    <p class="author-header-bio">{{bio}}</p>
+                {{/if}}
+                <div class="author-header-meta">
+                    {{#if location}}
+                        <span class="author-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            {{location}}
+                        </span>
+                    {{/if}}
+                    {{#if website}}
+                        <a href="{{website}}" class="author-website" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            Website
+                        </a>
+                    {{/if}}
+                    {{#if twitter}}
+                        <a href="https://twitter.com/{{twitter}}" class="author-twitter" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            @{{twitter}}
+                        </a>
+                    {{/if}}
+                </div>
+                <p class="author-header-count">
+                    {{plural ../pagination.total empty="No articles" singular="% article" plural="% articles"}}
+                </p>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Decorative Divider --}}
+    <div class="container">
+        <div class="section-divider">
+            <span class="divider-ornament"></span>
+        </div>
+    </div>
+
+    {{!-- Posts Grid --}}
+    <div class="posts-section">
+        <div class="container">
+            {{#if posts}}
+                <div class="post-grid">
+                    {{#foreach posts}}
+                        {{> post-card}}
+                    {{/foreach}}
+                </div>
+            {{else}}
+                <div class="no-posts">
+                    <p>No articles by this author yet.</p>
+                </div>
+            {{/if}}
+
+            {{!-- Pagination --}}
+            {{#if pagination.pages}}
+                <nav class="pagination" role="navigation">
+                    {{#if pagination.prev}}
+                        <a class="pagination-prev" href="{{pagination.prev}}">
+                            <span aria-hidden="true">&larr;</span> Newer Posts
+                        </a>
+                    {{/if}}
+                    <span class="pagination-info">Page {{pagination.page}} of {{pagination.pages}}</span>
+                    {{#if pagination.next}}
+                        <a class="pagination-next" href="{{pagination.next}}">
+                            Older Posts <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    {{/if}}
+                </nav>
+            {{/if}}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,23 @@
+{{!< default}}
+
+<section class="error-page">
+    <div class="container container-narrow">
+        <div class="error-content">
+            <h1 class="error-code">{{statusCode}}</h1>
+            <h2 class="error-message">{{message}}</h2>
+            <p class="error-description">
+                {{#is "404"}}
+                    The page you're looking for doesn't exist or has been moved.
+                {{else}}
+                    Something went wrong. Please try again later.
+                {{/is}}
+            </p>
+            <div class="error-divider">
+                <span class="divider-ornament"></span>
+            </div>
+            <div class="error-actions">
+                <a href="{{@site.url}}" class="btn btn-primary">Return Home</a>
+            </div>
+        </div>
+    </div>
+</section>

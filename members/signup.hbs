@@ -1,0 +1,103 @@
+{{!< default}}
+
+<section class="members-page signup-page">
+    <div class="container container-narrow">
+        <div class="members-card">
+            <header class="members-header">
+                <h1>Subscribe to {{@site.title}}</h1>
+                <p>Join our community and receive thoughtful theological reflections delivered to your inbox.</p>
+            </header>
+
+            <form class="members-form" data-members-form="subscribe">
+                <div class="form-group">
+                    <label for="signup-name">Name (optional)</label>
+                    <input
+                        type="text"
+                        id="signup-name"
+                        data-members-name
+                        placeholder="Your name"
+                        autocomplete="name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input
+                        type="email"
+                        id="signup-email"
+                        data-members-email
+                        placeholder="you@example.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Subscribe</span>
+                    <span class="btn-loading" style="display: none;">Subscribing...</span>
+                </button>
+
+                <div class="form-message" data-members-error></div>
+            </form>
+
+            <div class="signup-benefits">
+                <h4>What you'll receive:</h4>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Weekly theological reflections
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Book reviews and recommendations
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Early access to new content
+                    </li>
+                </ul>
+            </div>
+
+            <footer class="members-footer">
+                <p>Already have an account? <a href="#/portal/signin">Sign in</a></p>
+            </footer>
+        </div>
+    </div>
+</section>
+
+<style>
+    .signup-benefits {
+        margin-top: var(--space-xl);
+        padding: var(--space-lg);
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-md);
+        text-align: left;
+    }
+
+    .signup-benefits h4 {
+        font-family: var(--font-ui);
+        font-size: var(--text-sm);
+        font-weight: 600;
+        margin-bottom: var(--space-md);
+        color: var(--color-text-secondary);
+    }
+
+    .signup-benefits ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .signup-benefits li {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-size: var(--text-sm);
+        color: var(--color-text);
+    }
+
+    .signup-benefits svg {
+        color: var(--color-accent);
+        flex-shrink: 0;
+    }
+</style>

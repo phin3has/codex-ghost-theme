@@ -1,0 +1,110 @@
+{
+  "name": "codex-ghost-theme",
+  "description": "A scholarly Ghost theme with warm paper aesthetics, classic typography, and thoughtful design for long-form content.",
+  "version": "1.0.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "license": "MIT",
+  "author": {
+    "url": "https://github.com/brandonedmunds/codex-ghost-theme"
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme",
+    "codex",
+    "scholarly",
+    "typography",
+    "blog",
+    "publishing"
+  ],
+  "config": {
+    "posts_per_page": 12,
+    "custom_fonts": true,
+    "card_assets": true,
+    "image_sizes": {
+      "xxs": {
+        "width": 30
+      },
+      "xs": {
+        "width": 100
+      },
+      "s": {
+        "width": 300
+      },
+      "m": {
+        "width": 600
+      },
+      "l": {
+        "width": 1000
+      },
+      "xl": {
+        "width": 2000
+      }
+    },
+    "custom": {
+      "navigation_layout": {
+        "type": "select",
+        "options": ["Logo on the left", "Logo in the center"],
+        "default": "Logo on the left",
+        "description": "Navigation layout style"
+      },
+      "title_font": {
+        "type": "select",
+        "options": ["Playfair Display", "EB Garamond", "Cormorant Garamond", "Spectral"],
+        "default": "Playfair Display",
+        "description": "Heading font family"
+      },
+      "body_font": {
+        "type": "select",
+        "options": ["Source Serif 4", "Literata", "Lora"],
+        "default": "Source Serif 4",
+        "description": "Body text font family"
+      },
+      "accent_color": {
+        "type": "color",
+        "default": "#9D8461",
+        "description": "Primary accent color (bronze)"
+      },
+      "show_reading_time": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show estimated reading time on posts"
+      },
+      "site_subtitle": {
+        "type": "text",
+        "default": "",
+        "description": "Subtitle shown below site title (e.g., 'Theological Journal')"
+      },
+      "homepage_quote": {
+        "type": "text",
+        "default": "You have made us for yourself, O Lord, and our heart is restless until it rests in you.",
+        "description": "Inspirational quote displayed on homepage"
+      },
+      "homepage_quote_author": {
+        "type": "text",
+        "default": "St. Augustine of Hippo",
+        "description": "Quote author name"
+      },
+      "homepage_quote_source": {
+        "type": "text",
+        "default": "Confessions, Book I",
+        "description": "Quote source (book, sermon, etc.)"
+      },
+      "content_api_key": {
+        "type": "text",
+        "default": "",
+        "description": "Content API key for search (from Ghost Admin → Integrations)"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "gulp dev",
+    "zip": "gulp zip",
+    "test": "gscan ."
+  },
+  "devDependencies": {
+    "gscan": "^4.0.0"
+  }
+}

@@ -1,0 +1,140 @@
+{{!< default}}
+
+<section class="members-page account-page">
+    <div class="container container-narrow">
+        <div class="members-card">
+            <header class="members-header">
+                <h1>Your Account</h1>
+                <p>Manage your subscription and preferences.</p>
+            </header>
+
+            {{#if @member}}
+                <div class="account-info">
+                    <div class="account-avatar">
+                        {{#if @member.avatar_image}}
+                            <img src="{{@member.avatar_image}}" alt="{{@member.name}}">
+                        {{else}}
+                            <span class="avatar-placeholder">{{@member.name.[0]}}</span>
+                        {{/if}}
+                    </div>
+                    <h2 class="account-name">{{@member.name}}</h2>
+                    <p class="account-email">{{@member.email}}</p>
+
+                    {{#if @member.paid}}
+                        <span class="account-badge account-badge-paid">Paid Member</span>
+                    {{else}}
+                        <span class="account-badge account-badge-free">Free Subscriber</span>
+                    {{/if}}
+                </div>
+
+                <div class="account-actions">
+                    <a href="#/portal/account" class="btn btn-outline btn-full">
+                        Edit Profile
+                    </a>
+                    <a href="#/portal/account/newsletters" class="btn btn-outline btn-full">
+                        Newsletter Preferences
+                    </a>
+                    {{#unless @member.paid}}
+                        <a href="#/portal/account/plans" class="btn btn-primary btn-full">
+                            Upgrade to Paid
+                        </a>
+                    {{/unless}}
+                </div>
+
+                <footer class="members-footer">
+                    <a href="{{@site.url}}/ghost/#/signout/" class="signout-link">Sign Out</a>
+                </footer>
+            {{else}}
+                <p class="not-signed-in">You are not signed in.</p>
+                <a href="#/portal/signin" class="btn btn-primary">Sign In</a>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+<style>
+    .account-info {
+        text-align: center;
+        padding: var(--space-xl) 0;
+    }
+
+    .account-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto var(--space-lg);
+    }
+
+    .account-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius-full);
+        object-fit: cover;
+    }
+
+    .avatar-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background: var(--color-accent-light);
+        color: var(--color-accent);
+        font-family: var(--font-heading);
+        font-size: var(--text-3xl);
+        font-weight: 600;
+        border-radius: var(--radius-full);
+    }
+
+    .account-name {
+        font-size: var(--text-xl);
+        margin-bottom: var(--space-xs);
+    }
+
+    .account-email {
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-md);
+    }
+
+    .account-badge {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-md);
+        font-family: var(--font-ui);
+        font-size: var(--text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        border-radius: var(--radius-full);
+    }
+
+    .account-badge-paid {
+        background: var(--color-accent);
+        color: #fff;
+    }
+
+    .account-badge-free {
+        background: var(--color-bg-alt);
+        color: var(--color-text-secondary);
+    }
+
+    .account-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        margin-top: var(--space-xl);
+    }
+
+    .signout-link {
+        color: var(--color-text-tertiary);
+        font-size: var(--text-sm);
+        transition: color var(--transition-fast);
+    }
+
+    .signout-link:hover {
+        color: var(--color-error);
+    }
+
+    .not-signed-in {
+        margin-bottom: var(--space-lg);
+        color: var(--color-text-secondary);
+    }
+</style>

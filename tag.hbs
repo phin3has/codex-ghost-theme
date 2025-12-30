@@ -1,0 +1,66 @@
+{{!< default}}
+
+<section class="tag-archive">
+    {{!-- Tag Header --}}
+    <header class="archive-header">
+        <div class="container">
+            <div class="archive-header-content">
+                {{#if feature_image}}
+                    <img
+                        class="archive-header-image"
+                        src="{{img_url feature_image size="l"}}"
+                        alt="{{name}}"
+                    >
+                {{/if}}
+                <h1 class="archive-title">{{name}}</h1>
+                {{#if description}}
+                    <p class="archive-description">{{description}}</p>
+                {{/if}}
+                <p class="archive-count">
+                    {{plural ../pagination.total empty="No articles" singular="% article" plural="% articles"}}
+                </p>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Decorative Divider --}}
+    <div class="container">
+        <div class="section-divider">
+            <span class="divider-ornament"></span>
+        </div>
+    </div>
+
+    {{!-- Posts Grid --}}
+    <div class="posts-section">
+        <div class="container">
+            {{#if posts}}
+                <div class="post-grid">
+                    {{#foreach posts}}
+                        {{> post-card}}
+                    {{/foreach}}
+                </div>
+            {{else}}
+                <div class="no-posts">
+                    <p>No articles in this topic yet. Check back soon.</p>
+                </div>
+            {{/if}}
+
+            {{!-- Pagination --}}
+            {{#if pagination.pages}}
+                <nav class="pagination" role="navigation">
+                    {{#if pagination.prev}}
+                        <a class="pagination-prev" href="{{pagination.prev}}">
+                            <span aria-hidden="true">&larr;</span> Newer Posts
+                        </a>
+                    {{/if}}
+                    <span class="pagination-info">Page {{pagination.page}} of {{pagination.pages}}</span>
+                    {{#if pagination.next}}
+                        <a class="pagination-next" href="{{pagination.next}}">
+                            Older Posts <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    {{/if}}
+                </nav>
+            {{/if}}
+        </div>
+    </div>
+</section>

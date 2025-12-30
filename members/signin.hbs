@@ -1,0 +1,119 @@
+{{!< default}}
+
+<section class="members-page signin-page">
+    <div class="container container-narrow">
+        <div class="members-card">
+            <header class="members-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your subscription.</p>
+            </header>
+
+            <form class="members-form" data-members-form="signin">
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input
+                        type="email"
+                        id="signin-email"
+                        data-members-email
+                        placeholder="you@example.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loading" style="display: none;">Sending link...</span>
+                </button>
+
+                <div class="form-message" data-members-error></div>
+            </form>
+
+            <footer class="members-footer">
+                <p>Don't have an account? <a href="#/portal/signup">Subscribe now</a></p>
+            </footer>
+        </div>
+    </div>
+</section>
+
+<style>
+    .members-page {
+        padding: var(--space-5xl) 0;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .members-card {
+        max-width: 420px;
+        margin: 0 auto;
+        padding: var(--space-2xl);
+        background: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        text-align: center;
+    }
+
+    .members-header h1 {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--space-sm);
+    }
+
+    .members-header p {
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-xl);
+    }
+
+    .members-form .form-group {
+        text-align: left;
+        margin-bottom: var(--space-lg);
+    }
+
+    .members-form label {
+        display: block;
+        font-family: var(--font-ui);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        margin-bottom: var(--space-sm);
+    }
+
+    .members-form input {
+        width: 100%;
+        padding: var(--space-md);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        font-size: var(--text-base);
+        background: var(--color-bg);
+        transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .members-form input:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+
+    .btn-full {
+        width: 100%;
+    }
+
+    .members-footer {
+        margin-top: var(--space-xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .members-footer p {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+    }
+
+    .members-footer a {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    .members-footer a:hover {
+        text-decoration: underline;
+    }
+</style>

@@ -1,0 +1,222 @@
+{{!< default}}
+
+{{!-- Custom About Page Template --}}
+{{!-- Set this as the template for your About page in Ghost Admin --}}
+
+<article class="page-full page-about {{post_class}}">
+    {{!-- Page Header --}}
+    <header class="about-header">
+        <div class="container container-narrow">
+            <h1 class="about-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="about-subtitle">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+    </header>
+
+    {{!-- Feature Image as Hero --}}
+    {{#if feature_image}}
+        <div class="about-hero">
+            <div class="container">
+                <img
+                    src="{{img_url feature_image size="xl"}}"
+                    srcset="
+                        {{img_url feature_image size="s"}} 300w,
+                        {{img_url feature_image size="m"}} 600w,
+                        {{img_url feature_image size="l"}} 1000w,
+                        {{img_url feature_image size="xl"}} 2000w"
+                    sizes="(max-width: 800px) 100vw, 80vw"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                >
+            </div>
+        </div>
+    {{/if}}
+
+    {{!-- About Content --}}
+    <section class="about-content">
+        <div class="container container-narrow">
+            {{content}}
+        </div>
+    </section>
+
+    {{!-- Decorative Divider --}}
+    <div class="container container-narrow">
+        <div class="section-divider" style="margin: var(--space-3xl) 0;">
+            <span class="divider-ornament"></span>
+        </div>
+    </div>
+
+    {{!-- Team/Authors Section --}}
+    {{#get "authors" limit="15" as |authors|}}
+        {{#if authors}}
+            <section class="about-team">
+                <div class="container">
+                    <header class="section-header">
+                        <h2 class="section-title">Contributors</h2>
+                        <div class="section-divider">
+                            <span class="divider-ornament"></span>
+                        </div>
+                    </header>
+                    <div class="team-grid">
+                        {{#foreach authors}}
+                            <div class="team-member">
+                                {{#if profile_image}}
+                                    <img class="team-member-avatar" src="{{img_url profile_image size="m"}}" alt="{{name}}">
+                                {{else}}
+                                    <span class="team-member-avatar team-member-placeholder">{{name.[0]}}</span>
+                                {{/if}}
+                                <h3 class="team-member-name">
+                                    <a href="{{url}}">{{name}}</a>
+                                </h3>
+                                {{#if bio}}
+                                    <p class="team-member-bio">{{bio}}</p>
+                                {{/if}}
+                                {{#if location}}
+                                    <span class="team-member-location">{{location}}</span>
+                                {{/if}}
+                            </div>
+                        {{/foreach}}
+                    </div>
+                </div>
+            </section>
+        {{/if}}
+    {{/get}}
+
+    {{!-- Statement of Faith Section (if content includes it) --}}
+    <section class="about-cta">
+        <div class="container container-narrow">
+            <div class="cta-card">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to receive theological reflections, book reviews, and thoughtful commentary delivered to your inbox.</p>
+                {{#unless @member}}
+                    <a href="#/portal/signup" class="btn btn-primary">Subscribe Free</a>
+                {{else}}
+                    <p class="cta-member-note">Thank you for being a subscriber.</p>
+                {{/unless}}
+            </div>
+        </div>
+    </section>
+</article>
+
+<style>
+    .about-header {
+        padding: var(--space-4xl) 0 var(--space-2xl);
+        text-align: center;
+        background: var(--color-bg-alt);
+    }
+
+    .about-title {
+        font-size: var(--text-4xl);
+        margin-bottom: var(--space-md);
+    }
+
+    .about-subtitle {
+        font-size: var(--text-xl);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .about-hero {
+        margin-bottom: var(--space-3xl);
+    }
+
+    .about-hero img {
+        border-radius: var(--radius-md);
+        max-height: 500px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .about-team {
+        padding: var(--space-3xl) 0;
+        background: var(--color-bg-alt);
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-2xl);
+    }
+
+    .team-member {
+        text-align: center;
+        padding: var(--space-xl);
+        background: var(--color-bg-card);
+        border-radius: var(--radius-md);
+    }
+
+    .team-member-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: var(--radius-full);
+        object-fit: cover;
+        margin: 0 auto var(--space-lg);
+    }
+
+    .team-member-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-accent-light);
+        color: var(--color-accent);
+        font-family: var(--font-heading);
+        font-size: var(--text-3xl);
+        font-weight: 600;
+    }
+
+    .team-member-name {
+        font-size: var(--text-xl);
+        margin-bottom: var(--space-sm);
+    }
+
+    .team-member-name a {
+        transition: color var(--transition-fast);
+    }
+
+    .team-member-name a:hover {
+        color: var(--color-accent);
+    }
+
+    .team-member-bio {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        line-height: var(--leading-relaxed);
+        margin-bottom: var(--space-sm);
+    }
+
+    .team-member-location {
+        font-family: var(--font-ui);
+        font-size: var(--text-xs);
+        color: var(--color-text-muted);
+    }
+
+    .about-cta {
+        padding: var(--space-4xl) 0;
+    }
+
+    .cta-card {
+        text-align: center;
+        padding: var(--space-2xl);
+        background: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+    }
+
+    .cta-card h2 {
+        margin-bottom: var(--space-md);
+    }
+
+    .cta-card p {
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-lg);
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-member-note {
+        color: var(--color-accent) !important;
+        font-style: italic;
+    }
+</style>
