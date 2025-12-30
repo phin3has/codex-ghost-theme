@@ -15,9 +15,9 @@
     {{!-- Theme Color Variables --}}
     <style>
         :root {
-            --font-heading: '{{@custom.title_font}}', Georgia, 'Times New Roman', serif;
-            --font-body: '{{@custom.body_font}}', Georgia, 'Times New Roman', serif;
-            --color-accent: {{@custom.accent_color}};
+            --font-heading: '{{#if @custom.title_font}}{{@custom.title_font}}{{else}}Playfair Display{{/if}}', Georgia, 'Times New Roman', serif;
+            --font-body: '{{#if @custom.body_font}}{{@custom.body_font}}{{else}}Source Serif 4{{/if}}', Georgia, 'Times New Roman', serif;
+            --color-accent: {{#if @custom.accent_color}}{{@custom.accent_color}}{{else}}#9D8461{{/if}};
         }
     </style>
 

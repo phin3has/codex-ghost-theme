@@ -1,12 +1,13 @@
 {{!< default}}
 
 <article class="page-full {{post_class}}">
-    {{!-- Page Header - respects @page.show_title_and_feature_image for Beta editor pages --}}
-    {{!-- Shows by default for pages where @page is not defined (pre-Beta editor) --}}
-    {{#match @page.show_title_and_feature_image "!=" false}}
+    {{!-- Page Header - respects @page.show_title_and_feature_image (Ghost 5.54.1+) --}}
+    {{#match @page.show_title_and_feature_image}}
         <header class="page-header">
             <div class="container container-narrow">
-                <h1 class="page-title">{{title}}</h1>
+                {{#if title}}
+                    <h1 class="page-title">{{title}}</h1>
+                {{/if}}
                 {{#if custom_excerpt}}
                     <p class="page-excerpt">{{custom_excerpt}}</p>
                 {{/if}}
