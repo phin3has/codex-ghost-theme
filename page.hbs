@@ -1,8 +1,9 @@
 {{!< default}}
 
 <article class="page-full {{post_class}}">
-    {{!-- Page Header - respects @page.show_title_and_feature_image setting --}}
-    {{#if @page.show_title_and_feature_image}}
+    {{!-- Page Header - respects @page.show_title_and_feature_image for Beta editor pages --}}
+    {{!-- Shows by default for pages where @page is not defined (pre-Beta editor) --}}
+    {{#match @page.show_title_and_feature_image "!=" false}}
         <header class="page-header">
             <div class="container container-narrow">
                 <h1 class="page-title">{{title}}</h1>
@@ -30,7 +31,7 @@
                 {{/if}}
             </figure>
         {{/if}}
-    {{/if}}
+    {{/match}}
 
     {{!-- Page Content --}}
     <section class="page-content">
