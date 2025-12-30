@@ -1,0 +1,73 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from package.json
+        id: version
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Get commit short SHA
+        id: sha
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date -u +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_OUTPUT
+
+      - name: Create theme zip
+        run: |
+          # Create a clean directory for the theme
+          mkdir -p dist/codex-ghost-theme
+
+          # Copy theme files (excluding dev/build files)
+          cp -r assets dist/codex-ghost-theme/
+          cp -r partials dist/codex-ghost-theme/
+          cp -r members dist/codex-ghost-theme/
+          cp *.hbs dist/codex-ghost-theme/
+          cp package.json dist/codex-ghost-theme/
+          cp LICENSE dist/codex-ghost-theme/
+          cp routes.yaml dist/codex-ghost-theme/
+
+          # Create the zip
+          cd dist
+          zip -r codex-ghost-theme.zip codex-ghost-theme
+
+          # Move to root for upload
+          mv codex-ghost-theme.zip ../
+
+      - name: Create or update rolling release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Latest Build (v${{ steps.version.outputs.VERSION }})"
+          body: |
+            ## Codex Ghost Theme
+
+            **Version:** ${{ steps.version.outputs.VERSION }}
+            **Commit:** ${{ steps.sha.outputs.SHORT_SHA }}
+            **Built:** ${{ steps.date.outputs.DATE }}
+
+            ### Installation
+            1. Download `codex-ghost-theme.zip` below
+            2. Go to Ghost Admin → Settings → Design → Change Theme
+            3. Upload the zip file
+
+            ---
+            _This release is automatically updated on every push to main._
+          files: codex-ghost-theme.zip
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

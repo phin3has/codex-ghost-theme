@@ -27,7 +27,7 @@ A scholarly Ghost theme with warm paper aesthetics, classic typography, and thou
 
 ```bash
 # Clone the repo
-git clone https://github.com/brandonedmunds/codex-ghost-theme.git
+git clone https://github.com/phin3has/codex-ghost-theme.git
 
 # Create distribution zip
 cd codex-ghost-theme
