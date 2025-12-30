@@ -1,35 +1,33 @@
 {{!< default}}
 
 <article class="page-full {{post_class}}">
-    {{!-- Page Header - respects page setting for show_title_and_feature_image --}}
-    {{#if @page.show_title_and_feature_image}}
-        <header class="page-header">
-            <div class="container container-narrow">
-                <h1 class="page-title">{{title}}</h1>
-                {{#if custom_excerpt}}
-                    <p class="page-excerpt">{{custom_excerpt}}</p>
-                {{/if}}
-            </div>
-        </header>
+    {{!-- Page Header --}}
+    <header class="page-header">
+        <div class="container container-narrow">
+            <h1 class="page-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="page-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+        </div>
+    </header>
 
-        {{!-- Feature Image --}}
-        {{#if feature_image}}
-            <figure class="page-feature-image">
-                <img
-                    src="{{img_url feature_image size="xl"}}"
-                    srcset="
-                        {{img_url feature_image size="s"}} 300w,
-                        {{img_url feature_image size="m"}} 600w,
-                        {{img_url feature_image size="l"}} 1000w,
-                        {{img_url feature_image size="xl"}} 2000w"
-                    sizes="(max-width: 800px) 100vw, 80vw"
-                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                >
-                {{#if feature_image_caption}}
-                    <figcaption>{{feature_image_caption}}</figcaption>
-                {{/if}}
-            </figure>
-        {{/if}}
+    {{!-- Feature Image --}}
+    {{#if feature_image}}
+        <figure class="page-feature-image">
+            <img
+                src="{{img_url feature_image size="xl"}}"
+                srcset="
+                    {{img_url feature_image size="s"}} 300w,
+                    {{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1000w,
+                    {{img_url feature_image size="xl"}} 2000w"
+                sizes="(max-width: 800px) 100vw, 80vw"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            >
+            {{#if feature_image_caption}}
+                <figcaption>{{feature_image_caption}}</figcaption>
+            {{/if}}
+        </figure>
     {{/if}}
 
     {{!-- Page Content --}}
