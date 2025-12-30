@@ -13,14 +13,42 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Skip if this is a version bump commit (prevents infinite loop)
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get version from package.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bump patch version
         id: version
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        run: |
+          # Get current version
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+
+          # Bump patch version using npm (no git tag)
+          npm version patch --no-git-tag-version
+
+          # Get new version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "New version: $NEW_VERSION"
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add package.json
+          git commit -m "Bump version to ${{ steps.version.outputs.VERSION }} [skip ci]"
+          git push
 
       - name: Get commit short SHA
         id: sha
@@ -51,15 +79,14 @@ jobs:
           # Move to root for upload
           mv codex-ghost-theme.zip ../
 
-      - name: Create or update rolling release
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: "Latest Build (v${{ steps.version.outputs.VERSION }})"
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: "v${{ steps.version.outputs.VERSION }}"
           body: |
-            ## Codex Ghost Theme
+            ## Codex Ghost Theme v${{ steps.version.outputs.VERSION }}
 
-            **Version:** ${{ steps.version.outputs.VERSION }}
             **Commit:** ${{ steps.sha.outputs.SHORT_SHA }}
             **Built:** ${{ steps.date.outputs.DATE }}
 
@@ -68,8 +95,8 @@ jobs:
             2. Go to Ghost Admin → Settings → Design → Change Theme
             3. Upload the zip file
 
-            ---
-            _This release is automatically updated on every push to main._
+            ### Changes
+            See [commit history](https://github.com/phin3has/codex-ghost-theme/commits/main) for details.
           files: codex-ghost-theme.zip
           make_latest: true
         env:
