@@ -1,7 +1,7 @@
 {
   "name": "codex-ghost-theme",
   "description": "A scholarly Ghost theme with warm paper aesthetics, classic typography, and thoughtful design for long-form content.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "ghost": ">=5.0.0"
   },
@@ -47,19 +47,31 @@
     "custom": {
       "navigation_layout": {
         "type": "select",
-        "options": ["Logo on the left", "Logo in the center"],
+        "options": [
+          "Logo on the left",
+          "Logo in the center"
+        ],
         "default": "Logo on the left",
         "description": "Navigation layout style"
       },
       "title_font": {
         "type": "select",
-        "options": ["Playfair Display", "EB Garamond", "Cormorant Garamond", "Spectral"],
+        "options": [
+          "Playfair Display",
+          "EB Garamond",
+          "Cormorant Garamond",
+          "Spectral"
+        ],
         "default": "Playfair Display",
         "description": "Heading font family"
       },
       "body_font": {
         "type": "select",
-        "options": ["Source Serif 4", "Literata", "Lora"],
+        "options": [
+          "Source Serif 4",
+          "Literata",
+          "Lora"
+        ],
         "default": "Source Serif 4",
         "description": "Body text font family"
       },
