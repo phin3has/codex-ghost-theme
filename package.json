@@ -1,7 +1,7 @@
 {
   "name": "codex-ghost-theme",
   "description": "A scholarly Ghost theme with warm paper aesthetics, classic typography, and thoughtful design for long-form content.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "engines": {
     "ghost": ">=5.0.0"
   },
