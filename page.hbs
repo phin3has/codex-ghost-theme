@@ -1,13 +1,12 @@
 {{!< default}}
 
+{{#post}}
 <article class="page-full {{post_class}}">
-    {{!-- Page Header - respects @page.show_title_and_feature_image (Ghost 5.54.1+) --}}
+    {{!-- Page Header - respects @page.show_title_and_feature_image --}}
     {{#match @page.show_title_and_feature_image}}
         <header class="page-header">
             <div class="container container-narrow">
-                {{#if title}}
-                    <h1 class="page-title">{{title}}</h1>
-                {{/if}}
+                <h1 class="page-title">{{title}}</h1>
                 {{#if custom_excerpt}}
                     <p class="page-excerpt">{{custom_excerpt}}</p>
                 {{/if}}
@@ -50,3 +49,4 @@
         </div>
     </footer>
 </article>
+{{/post}}
