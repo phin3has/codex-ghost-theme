@@ -47,19 +47,21 @@
 
             {{!-- Pagination --}}
             {{#if pagination.pages}}
-                <nav class="pagination" role="navigation">
-                    {{#if pagination.prev}}
-                        <a class="pagination-prev" href="{{pagination.prev}}">
-                            <span aria-hidden="true">&larr;</span> Newer Posts
-                        </a>
-                    {{/if}}
-                    <span class="pagination-info">Page {{pagination.page}} of {{pagination.pages}}</span>
-                    {{#if pagination.next}}
-                        <a class="pagination-next" href="{{pagination.next}}">
-                            Older Posts <span aria-hidden="true">&rarr;</span>
-                        </a>
-                    {{/if}}
-                </nav>
+                {{#match pagination.pages ">" 1}}
+                    <nav class="pagination" role="navigation">
+                        {{#if pagination.prev}}
+                            <a class="pagination-prev" href="{{page_url pagination.prev}}">
+                                <span aria-hidden="true">&larr;</span> Newer Posts
+                            </a>
+                        {{/if}}
+                        <span class="pagination-info">Page {{pagination.page}} of {{pagination.pages}}</span>
+                        {{#if pagination.next}}
+                            <a class="pagination-next" href="{{page_url pagination.next}}">
+                                Older Posts <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        {{/if}}
+                    </nav>
+                {{/match}}
             {{/if}}
         </div>
     </div>
