@@ -64,7 +64,7 @@
             {{/if}}
 
             {{!-- Column 3: Sections (Tags) --}}
-            {{#get "tags" limit="5" order="count.posts desc" include="count.posts" as |tags|}}
+            {{#get "tags" limit="5" filter="visibility:public" order="count.posts desc" include="count.posts" as |tags|}}
                 {{#if tags}}
                     <nav class="footer-col footer-nav" aria-label="Sections">
                         <h4 class="footer-heading">Explore</h4>

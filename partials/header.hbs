@@ -43,8 +43,8 @@
 
                 {{!-- Navigation Menu --}}
                 <ul class="nav-menu" id="nav-menu">
-                    {{!-- Dynamic Tags/Sections (like footer) --}}
-                    {{#get "tags" limit="5" order="count.posts desc" include="count.posts"}}
+                    {{!-- Dynamic Tags/Sections --}}
+                    {{#get "tags" limit="5" filter="visibility:public" order="count.posts desc" include="count.posts"}}
                         {{#foreach tags}}
                             <li class="nav-item">
                                 <a href="{{url}}">{{name}}</a>
