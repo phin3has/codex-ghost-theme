@@ -1828,6 +1828,14 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-text);
 }
 
+/* Preserve blank lines from the editor: empty <p></p> would otherwise
+   collapse to zero height and disappear via margin-collapse. */
+.post-content p:empty,
+.page-content p:empty {
+    min-height: 1em;
+    min-height: 1lh;
+}
+
 /* Links */
 .post-content a,
 .page-content a {
