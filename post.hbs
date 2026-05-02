@@ -129,6 +129,21 @@
         </div>
     </footer>
 </article>
+
+{{!-- Comments Section (Ghost Native) --}}
+{{#if comments}}
+    <section class="comments-section">
+        <div class="container container-narrow">
+            <header class="section-header">
+                <h2 class="section-title">Discussion</h2>
+                <div class="section-divider">
+                    <span class="divider-ornament"></span>
+                </div>
+            </header>
+            {{comments}}
+        </div>
+    </section>
+{{/if}}
 {{/post}}
 
 {{!-- Related Posts --}}
@@ -178,18 +193,3 @@
         </div>
     </section>
 {{/unless}}
-
-{{!-- Comments Section (Ghost Native) --}}
-{{#if comments}}
-    <section class="comments-section">
-        <div class="container container-narrow">
-            <header class="section-header">
-                <h2 class="section-title">Discussion</h2>
-                <div class="section-divider">
-                    <span class="divider-ornament"></span>
-                </div>
-            </header>
-            {{comments}}
-        </div>
-    </section>
-{{/if}}
