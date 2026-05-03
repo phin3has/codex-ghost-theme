@@ -1790,13 +1790,15 @@ h1, h2, h3, h4, h5, h6 {
     line-height: var(--leading-relaxed);
 }
 
-.post-content > *,
-.page-content > * {
+/* Templates wrap {{content}} in .container, so the actual content
+   blocks are grandchildren of .post-content / .page-content. */
+.post-content > .container > *,
+.page-content > .container > * {
     margin-bottom: var(--space-xl);
 }
 
-.post-content > *:last-child,
-.page-content > *:last-child {
+.post-content > .container > *:last-child,
+.page-content > .container > *:last-child {
     margin-bottom: 0;
 }
 
