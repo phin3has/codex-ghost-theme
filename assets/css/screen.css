@@ -1792,7 +1792,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-content > *,
 .page-content > * {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
 }
 
 .post-content > *:last-child,
@@ -1826,14 +1826,6 @@ h1, h2, h3, h4, h5, h6 {
 .post-content p,
 .page-content p {
     color: var(--color-text);
-}
-
-/* Preserve blank lines from the editor: empty <p></p> would otherwise
-   collapse to zero height and disappear via margin-collapse. */
-.post-content p:empty,
-.page-content p:empty {
-    min-height: 1em;
-    min-height: 1lh;
 }
 
 /* Links */
